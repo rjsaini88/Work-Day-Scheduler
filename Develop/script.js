@@ -5,6 +5,35 @@ var timerInterval;
 var container = document.querySelector(".container");
 var blocks = [9,10,11,12,13,14,15,16,17];
 var date = new Date();
+var hours = date.getHours();
+console.log(date); //date, hours and minutes
+console.log(hours);//give me the hour 
+console.log (date + hours);
+
+var startTimer = function() {
+    timerInterval = setInterval(function() {
+//this function gets called every second.
+//get the date time string every second and put on page. 
+
+var currentDate = moment().format('dddd MMMM Do [at] LT'); //hh:mm:ss a
+timeEl.text(currentDate);
+        },1000);
+    };
+    startTimer();
+
+
+
+
+  var htmlVar = document.getElementsByClassName (".hour");
+  var text = htmlVar.textContent;
+
+  for (var i = 0; i < text.length; i++) {
+    console.log(text[i])
+  }
+
+
+
+  $(".hour").text()
 
 // function currentHour(hour){
 //     if (date.getHours() === hour) {
@@ -36,15 +65,7 @@ var date = new Date();
 
 
 
-var startTimer = function() {
-    timerInterval = setInterval(function() {
-//this function gets called every second.
-//get the date time string every second and put on page. 
-
-var currentDate = moment().format('dddd MMMM Do [at] LT'); //hh:mm:ss a
-timeEl.text(currentDate);
-        },1000);
-    };
-    startTimer();
 
 
+
+  
