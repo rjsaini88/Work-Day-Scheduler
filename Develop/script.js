@@ -44,15 +44,15 @@ $(document).ready(function () {
     var appHour = parseInt($(this).text());
     console.log(appHour);
 
-    if (appHour < currentHour) {
+    if (appHour < currentHour) {    //color option is only set to green. check this
       $(".time-block").addClass("past");
     } else if (appHour === currentHour) {
-      $(".time-block").addClass("present");
       $(".time-block").removeClass("past");
+      $(".time-block").addClass("present");
     } else {
-      $(".time-block").addClass("future");
       $(".time-block").removeClass("present");
       $(".time-block").removeClass("past");
+      $(".time-block").addClass("future");
     }
   });
   var htmlVar = document.getElementsByClassName(".hour");
