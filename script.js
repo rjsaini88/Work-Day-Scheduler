@@ -15,12 +15,11 @@ $(document).ready(function () {
   $(".notification").hide();
 
   $(".saveBtn").on("click", function (e) {
-    // question on save to localstorage and
-    // e.preventDefault();
+  
     var toDo = $(".description").val();
     var time = $(this).siblings(".hour").text().trim();
     localStorage.setItem(time, toDo);
-    $(".notification").show(); //question on how to make this function work on click. display for 5 seconds
+    $(".notification").show();  display for 5 seconds
     console.log(time);
     setTimeout(function () {
       $(".notification").hide();
@@ -29,8 +28,7 @@ $(document).ready(function () {
 
   var startTimer = function () {
     timerInterval = setInterval(function () {
-      //this function gets called every second.
-      //get the date time string every second and put on page.
+
 
       var currentDate = moment().format("dddd MMMM Do [at] LT"); //hh:mm:ss a
       timeEl.text(currentDate);
@@ -64,21 +62,5 @@ $(document).ready(function () {
   var htmlVar = document.getElementsByClassName(".hour");
   var text = htmlVar.textContent;
 
-  //   for (var i = 0; i < text.length; i++) {
-  //     console.log(text[i])
 
-  /*GIVEN I am using a daily planner to create a schedule
-WHEN I open the planner
-THEN the current day is displayed at the top of the calendar - done
-WHEN I scroll down
-THEN I am presented with timeblocks for standard business hours - done
-WHEN I view the timeblocks for that day
-THEN each timeblock is color coded to indicate whether it is in the past, present, or future
-WHEN I click into a timeblock
-THEN I can enter an event
-WHEN I click the save button for that timeblock
-THEN the text for that event is saved in local storage
-WHEN I refresh the page
-THEN the saved events persist
-*/
 });
