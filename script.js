@@ -1,27 +1,30 @@
 $(document).ready(function () {
   console.log("Your script is loaded");
+  var currentDate = moment().format("dddd MMMM Do [at] LT"); //hh:mm:ss a
   var timeEl = $(".date");
+  timeEl.text(currentDate);
   var timerInterval;
   // var containerEl = $(".container");
   var container = document.querySelector(".container");
   var blocks = [9, 10, 11, 12, 13, 14, 15, 16, 17];
   var date = new Date();
-  var currentHour = date.getHours() % 12 || 12;
+  var currentHour = date.getHours();
   console.log(date); //date, hours and minutes
   console.log(currentHour); //give me the hour
   console.log(date + currentHour);
   $(".notification").hide();
 
-  $("saveBtn").on("click", function (e) {
+  $(".saveBtn").on("click", function (e) {
     // question on save to localstorage and
     // e.preventDefault();
-    var toDo = $(".description").value();
-    var time = $(".hour").text();
+    var toDo = $(".description").val();
+    var time = $(this).siblings(".hour").text().trim();
     localStorage.setItem(time, toDo);
+    $(".notification").show(); //question on how to make this function work on click. display for 5 seconds
     console.log(time);
     setTimeout(function () {
-      $(".notification").show(); //question on how to make this function work on click. display for 5 seconds
-    }, 5000);
+      $(".notification").hide();
+    }, 3000);
   });
 
   var startTimer = function () {
@@ -35,24 +38,27 @@ $(document).ready(function () {
   };
   startTimer();
 
-  var appHour = parseInt($(".hour").text());
-  console.log(appHour);
-
-  console.log(parseInt($(".hour").text()));
-
   $(".hour").each(function () {
+    var hourKey = $(this).text().trim();
+    var todoValue = localStorage.getItem(hourKey);
+    $(this).siblings(".description").text(todoValue);
+    console.log("TODO STORED", todoValue);
     var appHour = parseInt($(this).text());
-    console.log(appHour);
-
-    if (appHour < currentHour) {    //color option is only set to green. check this
-      $(".time-block").addClass("past");
+    if ($(this).text().includes("PM") && $(this).text().trim() !== "12PM")
+      appHour += 12;
+    if (appHour < currentHour) {
+      //color option is only set to green. check this
+      $(this).parent().addClass("past");
+      $(this).parent().removeClass("present");
+      $(this).parent().removeClass("future");
     } else if (appHour === currentHour) {
-      $(".time-block").removeClass("past");
-      $(".time-block").addClass("present");
+      $(this).parent().removeClass("past");
+      $(this).parent().removeClass("future");
+      $(this).parent().addClass("present");
     } else {
-      $(".time-block").removeClass("present");
-      $(".time-block").removeClass("past");
-      $(".time-block").addClass("future");
+      $(this).parent().removeClass("present");
+      $(this).parent().removeClass("past");
+      $(this).parent().addClass("future");
     }
   });
   var htmlVar = document.getElementsByClassName(".hour");
