@@ -15,12 +15,10 @@ $(document).ready(function () {
   $(".notification").hide();
 
   $(".saveBtn").on("click", function (e) {
-  
     var toDo = $(".description").val();
     var time = $(this).siblings(".hour").text().trim();
     localStorage.setItem(time, toDo);
-    $(".notification").show();  display for 5 seconds
-    console.log(time);
+    $(".notification").show();
     setTimeout(function () {
       $(".notification").hide();
     }, 3000);
@@ -28,8 +26,6 @@ $(document).ready(function () {
 
   var startTimer = function () {
     timerInterval = setInterval(function () {
-
-
       var currentDate = moment().format("dddd MMMM Do [at] LT"); //hh:mm:ss a
       timeEl.text(currentDate);
     }, 1000);
@@ -61,6 +57,4 @@ $(document).ready(function () {
   });
   var htmlVar = document.getElementsByClassName(".hour");
   var text = htmlVar.textContent;
-
-
 });
